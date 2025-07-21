@@ -40,7 +40,7 @@ export type SensorData = {
 export const getAllStations = async () => {
   try {
     const res = await fetch(
-      'https://api.gios.gov.pl/pjp-api/rest/station/findAll',
+      'https://api.gios.gov.pl/pjp-api/v1/rest/station/findAll',
       {
         next: { revalidate: 86400 },
       }
@@ -68,7 +68,7 @@ export const getAqiData = async (stationsID: number[]) => {
       if (!stationID) return null;
 
       const res = await fetch(
-        `https://api.gios.gov.pl/pjp-api/rest/aqindex/getIndex/${stationID}`,
+        `https://api.gios.gov.pl/pjp-api/v1/rest/aqindex/getIndex/${stationID}`,
         {
           next: { revalidate: 900 },
         }
@@ -97,7 +97,7 @@ export const getSensorID = async (stationID: number) => {
 
   try {
     const res = await fetch(
-      `https://api.gios.gov.pl/pjp-api/rest/station/sensors/${stationID}`,
+      `https://api.gios.gov.pl/pjp-api/v1/rest/station/sensors/${stationID}`,
       {
         next: { revalidate: 86400 },
       }
@@ -134,7 +134,7 @@ export const getSensorData = async (sensorIDs: number[]) => {
   const sensorDataRequests = sensorIDs.map(async (sensorID) => {
     try {
       const res = await fetch(
-        `https://api.gios.gov.pl/pjp-api/rest/data/getData/${sensorID}`,
+        `https://api.gios.gov.pl/pjp-api/v1/rest/data/getData/${sensorID}`,
         {
           cache: 'no-store',
         }
